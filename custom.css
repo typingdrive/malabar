@@ -65,14 +65,14 @@ color: #05e2ff;
 /*service card */
 
 /* Container fixes */
+/* Container fixes */
 .image-cont {
-    position: relative; /* Scope hover effects within this container */
+    position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Prevent hover-effect overflow */
+    overflow: hidden; /* Keeps hover effect inside the container */
   }
   
-  /* Default state */
   .default img {
     width: 100%;
     height: auto;
@@ -88,37 +88,93 @@ color: #05e2ff;
     color: white;
     font-weight: bold;
     text-align: center;
-    z-index: 1; /* Ensure text is above the image */
+    z-index: 2; /* Ensure text is above the image */
   }
   
-  /* Hover effect */
   .hover-effect {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(46, 125, 50, 0.95); /* Semi-transparent background */
-    color: white;
+    background-color: rgba(46, 125, 50, 0.95); /* Background color fades in */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     opacity: 0;
-    transform: scale(1);
-    z-index: 2; /* Ensure hover-effect is above the default */
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 1;
+    transition: opacity 0.8s ease-in-out;
   }
   
-  /* Hover interactions */
   .image-cont:hover .hover-effect {
     opacity: 1;
-    transform: scale(1.05); /* Slight zoom effect */
   }
   
-  .image-cont:hover .default img {
-    opacity: 0; /* Hide the default image on hover */
+  /* Border animation */
+  .text-content {
+    position: relative;
+    display: inline-block;
+    padding: 20px 40px; /* Padding around the text */
+    color: white;
+    text-align: center;
   }
+  
+  .text-content::before,
+  .text-content::after,
+  .text-content span::before,
+  .text-content span::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    transition: all 0.8s ease-in-out;
+  }
+  
+  /* Top and Bottom borders */
+  .text-content::before,
+  .text-content::after {
+    height: 2px;
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .text-content::before {
+    top: 0;
+  }
+  
+  .text-content::after {
+    bottom: 0;
+  }
+  
+  /* Left and Right borders */
+  .text-content span::before,
+  .text-content span::after {
+    width: 2px;
+    height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .text-content span::before {
+    left: 0;
+  }
+  
+  .text-content span::after {
+    right: 0;
+  }
+  
+  /* Hover effect */
+  .image-cont:hover .text-content::before,
+  .image-cont:hover .text-content::after {
+    width: 100%; /* Horizontal lines grow to full width */
+  }
+  
+  .image-cont:hover .text-content span::before,
+  .image-cont:hover .text-content span::after {
+    height: 100%; /* Vertical lines grow to full height */
+  }
+  
   
 /*service card end*/  
 
